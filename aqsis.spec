@@ -21,7 +21,7 @@ BuildRequires:	liblog4cpp-devel
 BuildRequires:	libMesaGLU-devel
 BuildRequires:	mesaglut-devel
 BuildRequires:	tiff-devel
-BuildRequires:	XFree86-devel
+BuildRequires:	X11-devel
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:  fltk-devel
