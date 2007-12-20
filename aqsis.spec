@@ -15,6 +15,7 @@ Url:		http://www.aqsis.com/
 Group:		Graphics
 #Source:		%{name}-%{version}-%{snapshot}.tar.bz2
 Source:		%{name}-%{version}.tar.bz2
+BuildRoot:	%{_tmppath}/%{name}-buildroot
 Requires:	%{lib_name} = %{version}
 BuildRequires:	liblog4cpp-devel
 BuildRequires:	libMesaGLU-devel
