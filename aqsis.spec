@@ -1,22 +1,20 @@
-%define name		aqsis
-%define version		1.2.0
 #define snapshot	2006-12-23
-%define release		%mkrel 1
 %define lib_name_orig	libaqsis
-%define lib_major	1
-%define lib_name	%mklibname %{name} %{lib_major}
+%define major 1
+%define libname	%mklibname %{name} %{major}
+%define develname %mklibname %{name} -d
 
 Summary:	Open source RenderMan-compliant 3D rendering solution
-Name:           %{name}
-Version:        %{version}
-Release:        %{release}
-License:	GPL
-Url:		http://www.aqsis.com/
+Name:		aqsis
+Version:	1.2.0
+Release:	%mkrel 2
+License:	GPLv2+
+Url:		http://www.aqsis.org/
 Group:		Graphics
 #Source:		%{name}-%{version}-%{snapshot}.tar.bz2
-Source:		%{name}-%{version}.tar.bz2
+Source:		http://downloads.sourceforge.net/aqsis/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-buildroot
-Requires:	%{lib_name} = %{version}
+Requires:	%{libname} = %{version}-%{release}
 BuildRequires:	liblog4cpp-devel
 BuildRequires:	mesaglu-devel
 BuildRequires:	mesaglut-devel
@@ -24,7 +22,7 @@ BuildRequires:	tiff-devel
 BuildRequires:	X11-devel
 BuildRequires:	bison
 BuildRequires:	flex
-BuildRequires:  fltk-devel
+BuildRequires:	fltk-devel
 BuildRequires:	scons
 BuildRequires:	libxslt-proc
 BuildRequires:	OpenEXR-devel
@@ -35,31 +33,30 @@ BuildRequires:	boost-devel
 Tha Aqsis rendering system consists of a set of libraries and applications for
 creating high-quality computer imagery using the Pixar RenderMan Interface.
 
-%package -n %{lib_name}
-Summary: Aqsis rendering system
-License: GPL/LGPL
-Group: System/Libraries
+%package -n %{libname}
+Summary:	Aqsis rendering system
+Group:		System/Libraries
 
-%description -n %{lib_name}
+%description -n %{libname}
 The Aqsis library.
 
-%package -n %{lib_name}-devel
-Summary: Aqsis rendering system
-License: GPL
-Group: Development/C++
-Requires: %{lib_name} >= %{version}
-Provides: libaqsis-devel = %{version}
+%package -n %{develname}
+Summary:	Aqsis rendering system
+Group:		Development/C++
+Requires:	%{libname} >= %{version}-%{release}
+Provides:	lib%{name}-devel = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n %{lib_name}-devel
+%description -n %{develname}
 The Aqsis library developpement files.
 
 %prep
 %setup -q
 
 %build
-export CFLAGS=$RPM_OPT_FLAGS
-export CXXFLAGS=$RPM_OPT_FLAGS
-scons %{?_smp_mflags} destdir=$RPM_BUILD_ROOT \
+export CFLAGS="%{optflags}"
+export CXXFLAGS="%{optflags}"
+scons %{?_smp_mflags} destdir=%{buildroot} \
                 install_prefix=%{_prefix} \
                 sysconfdir=%{_sysconfdir} \
 		libdir=%{_libdir} \
@@ -67,37 +64,35 @@ scons %{?_smp_mflags} destdir=$RPM_BUILD_ROOT \
                 build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-export CFLAGS=$RPM_OPT_FLAGS
-export CXXFLAGS=$RPM_OPT_FLAGS
+rm -rf %{buildroot}
+export CFLAGS="%{optflags}"
+export CXXFLAGS="%{optflags}"
 scons install
 
-chmod a+rx $RPM_BUILD_ROOT%{_datadir}/%{name}/content/ribs/*/*/*.sh
-sed -i 's|/usr/bin/bash|/bin/bash|' $RPM_BUILD_ROOT%{_datadir}/%{name}/content/ribs/*/*/*.sh
+chmod a+rx %{buildroot}%{_datadir}/%{name}/content/ribs/*/*/*.sh
+sed -i 's|/usr/bin/bash|/bin/bash|' %{buildroot}%{_datadir}/%{name}/content/ribs/*/*/*.sh
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
-%post -n %{lib_name} -p /sbin/ldconfig
+%post -n %{libname} -p /sbin/ldconfig
 
-%postun -n %{lib_name} -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
 
 %files
 %defattr(-,root,root)
 %{_bindir}/*
-%doc AUTHORS COPYING INSTALL README ReleaseNotes
+%doc AUTHORS README ReleaseNotes
 %{_datadir}/%{name}
 %config(noreplace) %{_sysconfdir}/*
 %exclude %{_datadir}/%{name}/content/ribs/*/*/*.bat
 
-%files -n %{lib_name}
+%files -n %{libname}
 %defattr(-,root,root)
 %{_libdir}/%{name}
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}*
 
-%files -n %{lib_name}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_libdir}/*.so
 %{_includedir}/*
-
-
