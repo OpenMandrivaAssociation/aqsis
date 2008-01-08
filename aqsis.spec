@@ -18,7 +18,7 @@ Source:		%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 Requires:	%{lib_name} = %{version}
 BuildRequires:	liblog4cpp-devel
-BuildRequires:	libMesaGLU-devel
+BuildRequires:	mesaglu-devel
 BuildRequires:	mesaglut-devel
 BuildRequires:	tiff-devel
 BuildRequires:	X11-devel
