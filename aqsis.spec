@@ -46,6 +46,8 @@ Group:		Development/C++
 Requires:	%{libname} >= %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%mklibname %{name} 1 -d
+Provides:	%mklibname %{name} 1 -d
 
 %description -n %{develname}
 The Aqsis library developpement files.
