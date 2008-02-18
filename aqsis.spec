@@ -34,14 +34,14 @@ Tha Aqsis rendering system consists of a set of libraries and applications for
 creating high-quality computer imagery using the Pixar RenderMan Interface.
 
 %package -n %{libname}
-Summary:	Aqsis rendering system
+Summary:	Aqsis library
 Group:		System/Libraries
 
 %description -n %{libname}
 The Aqsis library.
 
 %package -n %{develname}
-Summary:	Aqsis rendering system
+Summary:	Development files for Aqsis
 Group:		Development/C++
 Requires:	%{libname} >= %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
