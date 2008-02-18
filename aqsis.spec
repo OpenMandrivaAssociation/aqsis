@@ -7,7 +7,7 @@
 Summary:	RenderMan-compliant 3D rendering solution
 Name:		aqsis
 Version:	1.2.0
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPLv2+
 Url:		http://www.aqsis.org/
 Group:		Graphics
