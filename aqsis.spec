@@ -4,7 +4,7 @@
 %define libname	%mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
-Summary:	Open source RenderMan-compliant 3D rendering solution
+Summary:	RenderMan-compliant 3D rendering solution
 Name:		aqsis
 Version:	1.2.0
 Release:	%mkrel 2
