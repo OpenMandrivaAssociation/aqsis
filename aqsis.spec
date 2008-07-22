@@ -1,4 +1,3 @@
-#define snapshot	2006-12-23
 %define lib_name_orig	libaqsis
 %define major 1
 %define libname	%mklibname %{name} %{major}
@@ -6,16 +5,14 @@
 
 Summary:	RenderMan-compliant 3D rendering solution
 Name:		aqsis
-Version:	1.2.0
-Release:	%mkrel 4
+Version:	1.4.0
+Release:	%mkrel 1
 License:	GPLv2+
-Url:		http://www.aqsis.org/
 Group:		Graphics
-#Source:		%{name}-%{version}-%{snapshot}.tar.bz2
-Source:		http://downloads.sourceforge.net/aqsis/%{name}-%{version}.tar.bz2
-BuildRoot:	%{_tmppath}/%{name}-buildroot
+Url:		http://www.aqsis.org/
+Source0:	http://downloads.sourceforge.net/aqsis/%{name}-%{version}.tar.bz2
 Requires:	%{libname} = %{version}-%{release}
-BuildRequires:	liblog4cpp-devel
+#BuildRequires:	liblog4cpp-devel
 BuildRequires:	mesaglu-devel
 BuildRequires:	mesaglut-devel
 BuildRequires:	tiff-devel
@@ -23,11 +20,12 @@ BuildRequires:	X11-devel
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	fltk-devel
-BuildRequires:	scons
+BuildRequires:	cmake
 BuildRequires:	libxslt-proc
 BuildRequires:	OpenEXR-devel
 BuildRequires:	zlib-devel
 BuildRequires:	boost-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 Tha Aqsis rendering system consists of a set of libraries and applications for
@@ -58,21 +56,15 @@ The Aqsis library developpement files.
 %build
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
-scons %{?_smp_mflags} destdir=%{buildroot} \
-                install_prefix=%{_prefix} \
-                sysconfdir=%{_sysconfdir} \
-		libdir=%{_libdir} \
-                no_rpath=true \
-                build
+
+%cmake
 
 %install
 rm -rf %{buildroot}
-export CFLAGS="%{optflags}"
-export CXXFLAGS="%{optflags}"
-scons install
+%makeinstall_std
 
-chmod a+rx %{buildroot}%{_datadir}/%{name}/content/ribs/*/*/*.sh
-sed -i 's|/usr/bin/bash|/bin/bash|' %{buildroot}%{_datadir}/%{name}/content/ribs/*/*/*.sh
+#chmod a+rx %{buildroot}%{_datadir}/%{name}/content/ribs/*/*/*.sh
+#sed -i 's|/usr/bin/bash|/bin/bash|' %{buildroot}%{_datadir}/%{name}/content/ribs/*/*/*.sh
 
 %clean
 rm -rf %{buildroot}
