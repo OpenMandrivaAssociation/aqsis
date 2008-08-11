@@ -69,7 +69,10 @@ export CXXFLAGS="%{optflags}"
     -DAQSIS_ENABLE_TESTING:BOOL=OFF \
     -DAQSIS_USE_PLUGINS:BOOL=ON \
     -DAQSIS_USE_TIMERS:BOOL=ON \
-    -DSYSCONFDIR:STRING=%{_sysconfdir}
+    -DSYSCONFDIR:STRING=%{_sysconfdir} \
+    -DLIBDIR="%{_libdir}" \
+    -DDEFAULT_DISPLAYPATH="%{_libdir}/%{name}"
+
 
 %make 
 
