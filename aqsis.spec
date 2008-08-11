@@ -12,10 +12,10 @@ Group:		Graphics
 Url:		http://www.aqsis.org/
 Source0:	http://downloads.sourceforge.net/aqsis/%{name}-%{version}.tar.bz2
 Requires:	%{libname} = %{version}-%{release}
-#BuildRequires:	liblog4cpp-devel
 BuildRequires:	mesaglu-devel
 BuildRequires:	mesaglut-devel
 BuildRequires:	tiff-devel
+BuildRequires:	libjpeg-devel
 BuildRequires:	X11-devel
 BuildRequires:	bison
 BuildRequires:	flex
@@ -54,17 +54,31 @@ The Aqsis library developpement files.
 %setup -q
 
 %build
+# (tpg) this is needec, because upstream didn't cleaned tarball
+# next release should be ok
+rm -rf build
+
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
 
-%cmake
+%cmake \
+    -DAQSIS_USE_FLTK:BOOL=ON \
+    -DAQSIS_USE_OPENEXR:BOOL=ON \
+    -DAQSIS_BOOST_LIB_SUFFIX:STRING=-mt \
+    -DCMAKE_CMAKE_BUILD_TYPE=Release \
+    -DAQSIS_ENABLE_TESTING:BOOL=OFF \
+    -DAQSIS_USE_PLUGINS:BOOL=ON \
+    -DAQSIS_USE_TIMERS:BOOL=ON \
+    -DSYSCONFDIR:STRING=%{_sysconfdir}
+
+%make 
 
 %install
 rm -rf %{buildroot}
-%makeinstall_std
 
-#chmod a+rx %{buildroot}%{_datadir}/%{name}/content/ribs/*/*/*.sh
-#sed -i 's|/usr/bin/bash|/bin/bash|' %{buildroot}%{_datadir}/%{name}/content/ribs/*/*/*.sh
+pushd build
+%makeinstall_std
+popd
 
 %clean
 rm -rf %{buildroot}
@@ -83,7 +97,9 @@ rm -rf %{buildroot}
 %doc AUTHORS README ReleaseNotes
 %{_datadir}/%{name}
 %config(noreplace) %{_sysconfdir}/*
-%exclude %{_datadir}/%{name}/content/ribs/*/*/*.bat
+%{_datadir}/applications/*.desktop
+%{_datadir}/mime/packages/aqsis.xml
+%{_datadir}/pixmaps/*.png
 
 %files -n %{libname}
 %defattr(-,root,root)
