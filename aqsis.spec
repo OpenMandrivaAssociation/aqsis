@@ -5,13 +5,12 @@
 
 Summary:	RenderMan-compliant 3D rendering solution
 Name:		aqsis
-Version:	1.4.0
-Release:	%mkrel 3
+Version:	1.4.1
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Graphics
 Url:		http://www.aqsis.org/
 Source0:	http://downloads.sourceforge.net/aqsis/%{name}-%{version}.tar.bz2
-Requires:	%{libname} = %{version}-%{release}
 BuildRequires:	mesaglu-devel
 BuildRequires:	mesaglut-devel
 BuildRequires:	tiff-devel
@@ -25,6 +24,7 @@ BuildRequires:	libxslt-proc
 BuildRequires:	OpenEXR-devel
 BuildRequires:	zlib-devel
 BuildRequires:	boost-devel
+Requires:	%{libname} = %{version}-%{release}
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
