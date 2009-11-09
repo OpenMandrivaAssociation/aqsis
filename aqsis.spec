@@ -5,14 +5,12 @@
 
 Summary:	RenderMan-compliant 3D rendering solution
 Name:		aqsis
-Version:	1.4.2
-Release:	%mkrel 3
+Version:	1.6.0
+Release:	%mkrel 1
 License:	GPLv2+i
 Group:		Graphics
 Url:		http://www.aqsis.org/
 Source0:	http://downloads.sourceforge.net/aqsis/%{name}-%{version}.tar.bz2
-Patch0:		aqsis-1.4.2-gcc44.patch
-Patch1:		aqsis-trunk-piqsl_libtiff.patch
 BuildRequires:	mesaglu-devel
 BuildRequires:	mesaglut-devel
 BuildRequires:	tiff-devel
@@ -54,8 +52,6 @@ The Aqsis library developpement files.
 
 %prep
 %setup -q
-%patch0 -p1 -b .piqsl_tiff
-%patch1 -p1 -b .gcc44
 
 %build
 # (tpg) this is needec, because upstream didn't cleaned tarball
@@ -74,7 +70,7 @@ rm -rf build
     -DLIBDIR="%{_libdir}" \
     -DDEFAULT_DISPLAYPATH="%{_libdir}/%{name}"
 
-%make 
+%make
 
 %install
 rm -rf %{buildroot}
@@ -96,10 +92,10 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%{_bindir}/*
-%doc AUTHORS README ReleaseNotes
-%{_datadir}/%{name}
+%doc AUTHORS README
 %config(noreplace) %{_sysconfdir}/*
+%{_bindir}/*
+%{_datadir}/%{name}
 %{_datadir}/applications/*.desktop
 %{_datadir}/mime/packages/aqsis.xml
 %{_datadir}/pixmaps/*.png
