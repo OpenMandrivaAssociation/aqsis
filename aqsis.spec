@@ -99,6 +99,7 @@ rm -rf %{buildroot}
 %{_datadir}/applications/*.desktop
 %{_datadir}/mime/packages/aqsis.xml
 %{_datadir}/pixmaps/*.png
+%{_iconsdir}/hicolor/*/mimetypes/*.png
 
 %files -n %{libname}
 %defattr(-,root,root)
