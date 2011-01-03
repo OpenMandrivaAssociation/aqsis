@@ -11,11 +11,7 @@ License:	GPLv2+i
 Group:		Graphics
 Url:		http://www.aqsis.org/
 Source0:	http://downloads.sourceforge.net/aqsis/%{name}-%{version}.tar.bz2
-BuildRequires:	mesaglu-devel
-BuildRequires:	mesaglut-devel
 BuildRequires:	tiff-devel
-BuildRequires:	libjpeg-devel
-BuildRequires:	X11-devel
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	fltk-devel
@@ -74,10 +70,7 @@ rm -rf build
 
 %install
 rm -rf %{buildroot}
-
-pushd build
-%makeinstall_std
-popd
+%makeinstall_std -C build
 
 %clean
 rm -rf %{buildroot}
