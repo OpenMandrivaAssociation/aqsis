@@ -53,6 +53,7 @@ The Aqsis library developpement files.
 # (tpg) this is needec, because upstream didn't cleaned tarball
 # next release should be ok
 rm -rf build
+export CXXFLAGS="%optflags  -DBOOST_FILESYSTEM_VERSION=2"
 
 %cmake \
     -DAQSIS_USE_FLTK:BOOL=ON \
