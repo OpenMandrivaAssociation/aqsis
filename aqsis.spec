@@ -6,11 +6,12 @@
 Summary:	RenderMan-compliant 3D rendering solution
 Name:		aqsis
 Version:	1.6.0
-Release:	%mkrel 8
+Release:	9
 License:	GPLv2+i
 Group:		Graphics
 Url:		http://www.aqsis.org/
 Source0:	http://downloads.sourceforge.net/aqsis/%{name}-%{version}.tar.bz2
+Patch0:		aqsis-1.6.0-missing-cstddef.patch
 BuildRequires:	tiff-devel
 BuildRequires:	bison
 BuildRequires:	flex
@@ -48,6 +49,7 @@ The Aqsis library developpement files.
 
 %prep
 %setup -q
+%patch0 -p1 -b .missing-includes~
 
 %build
 # (tpg) this is needec, because upstream didn't cleaned tarball
