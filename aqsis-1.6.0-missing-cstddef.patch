@@ -1,0 +1,20 @@
+--- ./libs/ri2rib/plstore.h.orig	2011-10-19 05:06:16.530685947 +0000
++++ ./libs/ri2rib/plstore.h	2011-10-19 05:06:39.570685642 +0000
+@@ -26,6 +26,7 @@
+ #ifndef RI2RIB_PLSTORE_H
+ #define RI2RIB_PLSTORE_H 1
+ 
++#include <cstddef>
+ #include <stdarg.h>
+ #include <vector>
+ #include <aqsis/ri/ri.h>
+--- ./libs/core/geometry/lath.h.orig	2011-10-19 05:23:31.910686005 +0000
++++ ./libs/core/geometry/lath.h	2011-10-19 05:23:47.140686243 +0000
+@@ -30,6 +30,7 @@
+ #include	<aqsis/aqsis.h>
+ #include	<aqsis/util/pool.h>
+ #include	<vector>
++#include	<cstddef>
+ 
+ namespace Aqsis {
+ 
