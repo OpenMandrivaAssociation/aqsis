@@ -4,13 +4,12 @@
 
 Summary:	RenderMan-compliant 3D rendering solution
 Name:		aqsis
-Version:	1.6.0
-Release:	10
+Version:	1.8.2
+Release:	1
 License:	GPLv2+i
 Group:		Graphics
 Url:		http://www.aqsis.org/
-Source0:	http://downloads.sourceforge.net/aqsis/%{name}-%{version}.tar.bz2
-Patch0:		aqsis-1.6.0-missing-cstddef.patch
+Source0:	http://downloads.sourceforge.net/aqsis/%{name}-%{version}.tar.gz
 
 BuildRequires:	bison
 BuildRequires:	cmake
@@ -44,14 +43,8 @@ The Aqsis library developpement files.
 
 %prep
 %setup -q
-%patch0 -p1 -b .missing-includes~
 
 %build
-# (tpg) this is needec, because upstream didn't cleaned tarball
-# next release should be ok
-rm -rf build
-export CXXFLAGS="%optflags  -DBOOST_FILESYSTEM_VERSION=2"
-
 %cmake \
     -DAQSIS_USE_FLTK:BOOL=ON \
     -DAQSIS_USE_OPENEXR:BOOL=ON \
@@ -86,3 +79,4 @@ export CXXFLAGS="%optflags  -DBOOST_FILESYSTEM_VERSION=2"
 %files -n %{devname}
 %{_libdir}/*.so
 %{_includedir}/*
+
