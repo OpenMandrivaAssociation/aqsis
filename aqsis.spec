@@ -5,7 +5,7 @@
 Summary:	RenderMan-compliant 3D rendering solution
 Name:		aqsis
 Version:	1.8.2
-Release:	1
+Release:	2
 License:	GPLv2+i
 Group:		Graphics
 Url:		http://www.aqsis.org/
@@ -16,7 +16,7 @@ BuildRequires:	cmake
 BuildRequires:	flex
 BuildRequires:	xsltproc
 BuildRequires:	boost-devel
-BuildRequires:	fltk-devel
+BuildRequires:	qt4-devel
 BuildRequires:	tiff-devel
 BuildRequires:	OpenEXR-devel
 BuildRequires:	zlib-devel
@@ -46,7 +46,7 @@ The Aqsis library developpement files.
 
 %build
 %cmake \
-    -DAQSIS_USE_FLTK:BOOL=ON \
+    -DAQSIS_USE_QT:BOOL=ON \
     -DAQSIS_USE_OPENEXR:BOOL=ON \
     -DAQSIS_BOOST_LIB_SUFFIX:STRING=-mt \
     -DCMAKE_CMAKE_BUILD_TYPE=Release \
