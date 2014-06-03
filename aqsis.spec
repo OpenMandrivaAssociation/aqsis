@@ -10,6 +10,7 @@ License:	GPLv2+i
 Group:		Graphics
 Url:		http://www.aqsis.org/
 Source0:	http://downloads.sourceforge.net/aqsis/%{name}-%{version}.tar.gz
+Source1:	aqsis.rpmlintrc
 
 BuildRequires:	bison
 BuildRequires:	cmake
