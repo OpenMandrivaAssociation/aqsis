@@ -18,7 +18,7 @@ BuildRequires:	xsltproc
 BuildRequires:	boost-devel
 BuildRequires:	qt4-devel
 BuildRequires:	tiff-devel
-BuildRequires:	OpenEXR-devel
+BuildRequires:	pkgconfig(OpenEXR)
 BuildRequires:	zlib-devel
 
 %description
