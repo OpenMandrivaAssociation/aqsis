@@ -8,7 +8,7 @@ Version:	1.8.2
 Release:	4
 License:	GPLv2+i
 Group:		Graphics
-Url:		http://www.aqsis.org/
+Url:		https://www.aqsis.org/
 Source0:	http://downloads.sourceforge.net/aqsis/%{name}-%{version}.tar.gz
 Source1:	aqsis.rpmlintrc
 
